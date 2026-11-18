@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="72%">
+      <stop offset="0" stop-color="#313244"/>
+      <stop offset="0.6" stop-color="#1e1e2e"/>
+      <stop offset="1" stop-color="#11111b"/>
+    </radialGradient>
+    <linearGradient id="sup" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#b4befe"/>
+      <stop offset="1" stop-color="#cba6f7"/>
+    </linearGradient>
+    <linearGradient id="adc" x1="1" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#94e2d5"/>
+      <stop offset="1" stop-color="#74c7ec"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#cdd6f4" stroke-opacity="0.05" stroke-width="1.5"/>
+    </pattern>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- heart, split by a diagonal "river" -->
+    <clipPath id="left"><polygon points="0,0 262,0 238,512 0,512"/></clipPath>
+    <clipPath id="right"><polygon points="278,0 512,0 512,512 254,512"/></clipPath>
+    <path id="heart" d="M256 420 C 150 350 96 290 96 214 C 96 158 138 118 190 118 C 222 118 244 134 256 158 C 268 134 290 118 322 118 C 374 118 416 158 416 214 C 416 290 362 350 256 420 Z"/>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <rect width="512" height="512" fill="url(#grid)"/>
+  <g filter="url(#glow)">
+    <use href="#heart" fill="url(#sup)" clip-path="url(#left)"/>
+    <use href="#heart" fill="url(#adc)" clip-path="url(#right)"/>
+  </g>
+  <!-- small shield mark (support) and crosshair mark (ADC) -->
+  <path d="M190 196 L222 208 V236 C222 258 208 272 190 281 C172 272 158 258 158 236 V208 Z" fill="none" stroke="#1e1e2e" stroke-width="10" stroke-linejoin="round"/>
+  <g stroke="#1e1e2e" stroke-width="10" stroke-linecap="round" fill="none">
+    <circle cx="326" cy="236" r="26"/>
+    <line x1="326" y1="192" x2="326" y2="206"/>
+    <line x1="326" y1="266" x2="326" y2="280"/>
+    <line x1="282" y1="236" x2="296" y2="236"/>
+    <line x1="356" y1="236" x2="370" y2="236"/>
+  </g>
+  <!-- spark -->
+  <path d="M392 108 L400 128 L420 136 L400 144 L392 164 L384 144 L364 136 L384 128 Z" fill="#f9e2af" filter="url(#glow)"/>
+</svg>

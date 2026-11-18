@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rift-duo-bot",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+
+  // One Durable Object per Telegram chat: game state, stats, notes and spell timers.
+  // SQLite-backed Durable Objects run on the Workers Free plan.
+  "durable_objects": {
+    "bindings": [{ "name": "CHAT", "class_name": "ChatState" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ChatState"] }],
+
+  "vars": {
+    // Max Claude calls per chat per day (screenshots, /ask, /patch).
+    "AI_DAILY_LIMIT": "40"
+  }
+  // Secrets (set with `npx wrangler secret put NAME`):
+  //   TELEGRAM_TOKEN      - from @BotFather
+  //   WEBHOOK_SECRET      - any random string; protects the webhook URL
+  //   ANTHROPIC_API_KEY   - optional; enables screenshots, /ask and /patch
+  //   PLAYERS             - "userId:Name:role,userId:Name:role" (role = support | adc);
+  //                         set by scripts/set-players.sh, kept out of git
+}
